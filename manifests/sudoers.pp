@@ -9,7 +9,8 @@ class boxen::sudoers {
       "/bin/mkdir -p ${::boxen_home}",
       "/usr/sbin/chown ${::luser}\\:staff ${::boxen_home}",
       "${boxen::config::repodir}/bin/puppet",
-      '/bin/rm -f /tmp/boxen.log'
+      '/bin/rm -f /tmp/boxen.log',
+      "/bin/cp ${boxen::config::puppetdir}/var/state/last_run_report.yaml ${boxen::config::repodir}/log/reports"
     ],
     type     => 'user_spec',
   }
