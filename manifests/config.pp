@@ -29,8 +29,8 @@ class boxen::config {
           $envdir,
           $logdir,
           $socketdir]:
-
-    ensure => directory
+    ensure => directory,
+    links  => follow
   }
 
   file { "${home}/README.md":
@@ -61,6 +61,6 @@ class boxen::config {
 
   file { $puppet_data_dirs:
     ensure => directory,
-    owner  => $::luser
+    owner  => $::boxen_user
   }
 }
