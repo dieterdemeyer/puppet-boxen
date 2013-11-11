@@ -3,7 +3,6 @@ require "boxen/config"
 
 config      = Boxen::Config.load
 facts       = {}
-factsdir    = "#{config.homedir}/config/facts"
 dot_boxen   = "#{ENV['HOME']}/.boxen"
 user_config = "#{dot_boxen}/config.json"
 
@@ -36,6 +35,18 @@ if config.respond_to? :repotemplate
   facts["boxen_repo_url_template"] = config.repotemplate
 else
   facts["boxen_repo_url_template"] = "https://github.com/%s"
+end
+
+if config.respond_to? :s3host
+  facts["boxen_s3_host"] = config.s3host
+else
+  facts["boxen_s3_host"] = "s3.amazonaws.com"
+end
+
+if config.respond_to? :s3bucket
+  facts["boxen_s3_bucket"] = config.s3bucket
+else
+  facts["boxen_s3_bucket"] = "boxen-downloads"
 end
 
 facts.each do |k, v|
